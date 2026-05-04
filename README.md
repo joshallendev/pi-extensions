@@ -11,7 +11,6 @@ Tracks the duration of each agent turn and displays it in the footer. Shows both
 **Features:**
 - Live timer showing current agent turn duration (updates every 100ms)
 - Displays last completed turn's duration for reference
-- Shows model/provider info in the footer when available
 
 **How it works:**
 - Captures `agent_start` and `agent_end` events to measure turn duration

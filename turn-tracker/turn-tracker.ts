@@ -37,12 +37,6 @@ export default function (pi: ExtensionAPI) {
         render(width: number): string[] {
           const parts: string[] = [];
 
-          // Add model info if available
-          if (ctx.model) {
-            const model = ctx.model;
-            parts.push(`Model: ${model.provider}/${model.id}`);
-          }
-
           if (turnStartTime) {
             const elapsed = (Date.now() - turnStartTime) / 1000;
             parts.push(`Current turn: ${formatDuration(elapsed)}`);
