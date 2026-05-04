@@ -1,0 +1,19 @@
+# pi-extensions
+
+A collection of [pi](https://github.com/mariozechner/pi-coding-agent) extensions for tracking and enhancing your coding agent experience.
+
+## Extensions
+
+### [turn-tracker](./turn-tracker/)
+
+Tracks the duration of each agent turn and displays it in the footer. Shows both the current active turn's elapsed time (live-updated) and the previous turn's duration.
+
+**Features:**
+- Live timer showing current agent turn duration (updates every 100ms)
+- Displays last completed turn's duration for reference
+- Shows model/provider info in the footer when available
+
+**How it works:**
+- Captures `agent_start` and `agent_end` events to measure turn duration
+- Uses a live timer loop that triggers re-renders for the footer component
+- Formats durations as `XmYs` (e.g., `2m15s`) for readability
