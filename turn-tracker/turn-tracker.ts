@@ -14,7 +14,7 @@ function formatDuration(seconds: number): string {
 
 /**
  * Turn Tracker Extension
- * Tracks the duration of each agent turn and displays it in the footer.
+ * Composes turn timing alongside default footer data (git branch, provider count).
  */
 export default function (pi: ExtensionAPI) {
   let turnStartTime: number | null = null;
@@ -29,7 +29,7 @@ export default function (pi: ExtensionAPI) {
     if (!ctx.hasUI) return;
 
     // Set the custom footer using the component pattern
-    ctx.ui.setFooter((tui, theme) => {
+    ctx.ui.setFooter((tui, theme, footerData) => {
       currentRequestRender = () => tui.requestRender();
 
       return {
@@ -37,6 +37,7 @@ export default function (pi: ExtensionAPI) {
         render(width: number): string[] {
           const parts: string[] = [];
 
+          // Compose turn timing alongside default footer data
           if (turnStartTime) {
             const elapsed = (Date.now() - turnStartTime) / 1000;
             parts.push(`Current turn: ${formatDuration(elapsed)}`);
@@ -44,6 +45,17 @@ export default function (pi: ExtensionAPI) {
 
           if (lastDuration !== null) {
             parts.push(`Last turn: ${formatDuration(lastDuration)}`);
+          }
+
+          // Append default footer data (git branch, provider count)
+          const gitBranch = footerData.getGitBranch();
+          if (gitBranch) {
+            parts.push(`Branch: ${gitBranch}`);
+          }
+
+          const providerCount = footerData.getAvailableProviderCount();
+          if (providerCount > 0) {
+            parts.push(`${providerCount} provider(s)`);
           }
 
           return [parts.join(" | ")];

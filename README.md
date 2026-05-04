@@ -11,6 +11,13 @@ Tracks the duration of each agent turn and displays it in the footer. Shows both
 **Features:**
 - Live timer showing current agent turn duration (updates every 100ms)
 - Displays last completed turn's duration for reference
+- Composes turn timing alongside default footer data (git branch, provider count)
+
+**How it works:**
+- Captures `agent_start` and `agent_end` events to measure turn duration
+- Uses a live timer loop that triggers re-renders for the footer component
+- Formats durations as `XmYs` (e.g., `2m15s`) for readability
+- Composes turn info alongside default footer data (git branch, provider count)
 
 **How it works:**
 - Captures `agent_start` and `agent_end` events to measure turn duration
